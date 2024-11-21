@@ -1,0 +1,5 @@
+infra/aws/.terraform
+infra/aws/.terraform.lock.hcl
+infra/aws/nomad-aws-key-pair.pem
+infra/aws/terraform.tfstate
+infra/aws/terraform.tfstate.backup

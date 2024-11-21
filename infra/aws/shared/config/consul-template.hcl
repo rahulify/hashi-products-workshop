@@ -1,6 +1,6 @@
 vault {
   address      = "http://active.vault.service.consul:8200"
-  token        = "root"
+  token        = ""
   grace        = "1s"
   unwrap_token = false
   renew_token  = true
