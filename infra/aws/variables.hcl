@@ -2,7 +2,7 @@
 region                    = "us-east-1"
 
 # Terraform variables (all are required)
-ami                       = "ami-01368679adfbf0c8b"
+ami                       = "ami-05219dca0052184e3"
 
 # These variables will default to the values shown
 # and do not need to be updated unless you want to

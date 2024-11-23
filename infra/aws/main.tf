@@ -45,6 +45,33 @@ resource "aws_security_group" "consul_nomad_ui_ingress" {
   }
 }
 
+resource "aws_security_group" "vault" {
+  name   = "${var.name_prefix}-vault-ingress"
+  vpc_id = data.aws_vpc.default.id
+
+  # Vault
+  ingress {
+    from_port       = 8200
+    to_port         = 8200
+    protocol        = "tcp"
+    cidr_blocks     = [var.allowlist_ip]
+  }
+
+  ingress {
+    from_port = 0
+    to_port   = 0
+    protocol  = "-1"
+    self      = true
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
 resource "aws_security_group" "ssh_ingress" {
   name   = "${var.name_prefix}-ssh-ingress"
   vpc_id = data.aws_vpc.default.id
@@ -151,10 +178,11 @@ data "hcp_packer_artifact" "nomad-images" {
 }
 
 resource "aws_instance" "server" {
-  ami                    = var.ami
+  #ami                    = var.ami
+  ami                    = data.hcp_packer_artifact.nomad-images.external_identifier
   instance_type          = var.server_instance_type
   key_name               = aws_key_pair.nomad.key_name
-  vpc_security_group_ids = [aws_security_group.consul_nomad_ui_ingress.id, aws_security_group.ssh_ingress.id, aws_security_group.allow_all_internal.id]
+  vpc_security_group_ids = [aws_security_group.consul_nomad_ui_ingress.id, aws_security_group.ssh_ingress.id, aws_security_group.allow_all_internal.id, aws_security_group.vault.id]
   count                  = var.server_count
 
   # instance tags

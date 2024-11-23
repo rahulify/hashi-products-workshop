@@ -11,6 +11,7 @@ NOMAD_BOOTSTRAP_TOKEN="/tmp/nomad_bootstrap"
 NOMAD_USER_TOKEN="/tmp/nomad_user_token"
 
 sed -i "s/CONSUL_TOKEN/${nomad_consul_token_secret}/g" /etc/nomad.d/nomad.hcl
+sed -i "s/CONSUL_TOKEN/${nomad_consul_token_secret}/g" /etc/vault.d/vault.hcl
 
 sudo systemctl restart nomad
 

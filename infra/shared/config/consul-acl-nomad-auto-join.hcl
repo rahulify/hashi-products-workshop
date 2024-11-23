@@ -23,3 +23,7 @@ query_prefix "" {
 service_prefix "" {
     policy = "write"
 }
+
+session_prefix "" {
+    policy = "write"
+}
