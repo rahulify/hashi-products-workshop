@@ -148,6 +148,8 @@ path "auth/token/renew-self" {
 }
 EOF
 
+vault login $VAULT_TOKEN
+
 vault policy write nomad-server nomad-server-policy.hcl
 
 tee nomad-cluster-role.json <<EOF
