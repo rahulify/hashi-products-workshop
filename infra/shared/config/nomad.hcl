@@ -16,24 +16,11 @@ acl {
   enabled = true
 }
 
-#vault {
-#  enabled          = false
-#  address          = "http://active.vault.service.consul:8200"
-#  task_token_ttl   = "1h"
-#  create_from_role = "nomad-cluster"
-#  token            = ""
-#}
-
 vault {
-  enabled = true
-  address          = "http://active.vault.service.consul:8200"
-
-  default_identity {
-    aud = ["vault.io"]
-    ttl = "1h"
-
-    extra_claims {
-      unique_id = "${job.region}:${job.namespace}:${job.id}"
-    }
-  }
+  enabled          = true
+  address          = "http://127.0.0.1:8200"
+  task_token_ttl   = "1h"
+  create_from_role = "nomad-cluster"
+  token            = "VAULT_USER_TOKEN"
 }
+
