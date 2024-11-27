@@ -102,7 +102,7 @@ echo -e '\e[38;5;198m'"++++ Auto unseal vault"
 for i in $(cat /etc/vault.d/init.file | grep Unseal | cut -d " " -f4 | head -n 3); do vault operator unseal $i; done
 VAULT_TOKEN=$(grep 'Initial Root Token' /etc/vault.d/init.file | cut -d ':' -f2 | tr -d ' ')
 
-consul kv put -token-file=$CONSUL_BOOTSTRAP_TOKEN vault_token "$VAULT_TOKEN"
+consul kv put -token-file=$CONSUL_BOOTSTRAP_TOKEN vault_root_token "$VAULT_TOKEN"
 
 tee nomad-server-policy.hcl <<EOF
 
