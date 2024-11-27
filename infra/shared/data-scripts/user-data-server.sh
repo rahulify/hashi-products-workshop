@@ -86,6 +86,7 @@ consul kv put -token-file=$CONSUL_BOOTSTRAP_TOKEN nomad_user_token "$(cat $NOMAD
 
 echo "ACL bootstrap end"
 
+# After consul bootstrap is completed, vault shall consume the consul as its storage.
 sudo systemctl restart vault
 
 sleep 10
